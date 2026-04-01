@@ -178,3 +178,48 @@ html, body, #root {
   font-variant-numeric: tabular-nums;
   flex-shrink: 0;
 }
+
+/* ── Legend ── */
+.legend {
+  position: absolute;
+  bottom: 90px;
+  left: 16px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+}
+
+.legend-line {
+  display: inline-block;
+  width: 18px;
+  height: 0;
+  border-top: 2px solid;
+  flex-shrink: 0;
+}
+
+.legend-total {
+  border-color: rgba(255,255,255,0.55);
+}
+
+.legend-us {
+  border-color: rgba(224,48,48,0.45);
+}
+
+.legend-other {
+  border-color: rgba(255,255,255,0.2);
+}
+
+.legend-oil {
+  border-color: rgba(234,179,8,0.4);
+  border-top-style: dashed;
+}

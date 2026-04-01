@@ -201,6 +201,13 @@ function App() {
         onYearChange={setYear}
         onTogglePlay={togglePlay}
       />
+
+      <div className="legend">
+        <div className="legend-item"><span className="legend-line legend-total"></span>All bases</div>
+        <div className="legend-item"><span className="legend-line legend-us"></span>US bases</div>
+        <div className="legend-item"><span className="legend-line legend-other"></span>Other countries</div>
+        <div className="legend-item"><span className="legend-line legend-oil"></span>Oil price</div>
+      </div>
     </div>
   );
 }
