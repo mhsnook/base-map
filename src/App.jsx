@@ -111,11 +111,11 @@ function App() {
   }, [playing]);
 
   const togglePlay = useCallback(() => {
-    if (!playing) {
+    if (!playing && year === END_YEAR) {
       setYear(START_YEAR);
     }
     setPlaying((p) => !p);
-  }, [playing]);
+  }, [playing, year]);
 
   const activeBases = useMemo(() => getBasesForYear(year), [year]);
   const currentCount = yearCounts[year].total;
