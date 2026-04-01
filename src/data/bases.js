@@ -161,7 +161,7 @@ export const bases = [
   { name: "Berbera (Somalia, USSR)", country: "Russia", lat: 10.4389, lng: 45.0369, yearOpened: 1969, yearClosed: 1977 },
   { name: "Aden (South Yemen, USSR)", country: "Russia", lat: 12.7897, lng: 45.0286, yearOpened: 1968, yearClosed: 1990 },
   { name: "Luanda (Angola, USSR)", country: "Russia", lat: -8.8383, lng: 13.2344, yearOpened: 1975, yearClosed: 1991 },
-  { name: "Cienfuegos (Cuba, USSR)", country: "Russia", lat: 22.1456, lng: -80.4353, yearOpened: 1962, yearClosed: 1962 },
+  { name: "Cienfuegos (Cuba, USSR)", country: "Russia", lat: 22.1456, lng: -80.4353, yearOpened: 1962, yearClosed: 1963 },
   { name: "Poti (Georgia, USSR)", country: "Russia", lat: 42.1514, lng: 41.6719, yearOpened: 1950, yearClosed: 2007 },
 
   // ===== CHINA =====
