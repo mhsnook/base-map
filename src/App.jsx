@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { MapContainer, TileLayer, CircleMarker, Tooltip, useMap } from "react-leaflet";
 import { getBaseCountsByYear, getBasesForYear, COUNTRY_COLORS } from "./data/bases";
+import { oilPrices } from "./data/oil";
 import "leaflet/dist/leaflet.css";
 
 const START_YEAR = 1950;
@@ -23,6 +24,11 @@ function Timeline({ year, playing, onYearChange, onTogglePlay }) {
     [years]
   );
 
+  const maxOil = useMemo(
+    () => Math.max(...years.map((y) => oilPrices[y] || 0)),
+    [years]
+  );
+
   const getX = useCallback(
     (y) => ((y - START_YEAR) / (END_YEAR - START_YEAR)) * 1000,
     []
@@ -31,6 +37,11 @@ function Timeline({ year, playing, onYearChange, onTogglePlay }) {
   const getY = useCallback(
     (count) => 60 - (count / maxTotal) * 52 - 4,
     [maxTotal]
+  );
+
+  const getOilY = useCallback(
+    (price) => 60 - (price / maxOil) * 52 - 4,
+    [maxOil]
   );
 
   const handleClick = useCallback(
@@ -57,6 +68,14 @@ function Timeline({ year, playing, onYearChange, onTogglePlay }) {
   const otherLine = useMemo(() => buildLine((c) => c.otherBases), [buildLine]);
   const totalLine = useMemo(() => buildLine((c) => c.total), [buildLine]);
 
+  const oilLine = useMemo(
+    () =>
+      years
+        .map((y, i) => `${i === 0 ? "M" : "L"}${getX(y)},${getOilY(oilPrices[y] || 0)}`)
+        .join(" "),
+    [years, getX, getOilY]
+  );
+
   const dotX = getX(year);
   const dotY = getY(yearCounts[year].total);
 
@@ -71,6 +90,7 @@ function Timeline({ year, playing, onYearChange, onTogglePlay }) {
             d={`${totalLine} L${getX(END_YEAR)},60 L${getX(START_YEAR)},60 Z`}
             fill="rgba(255,255,255,0.03)"
           />
+          <path d={oilLine} fill="none" stroke="rgba(234,179,8,0.3)" strokeWidth="1.5" strokeDasharray="4 3" vectorEffect="non-scaling-stroke" />
           <path d={otherLine} fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="2" vectorEffect="non-scaling-stroke" />
           <path d={usLine} fill="none" stroke="rgba(224,48,48,0.45)" strokeWidth="2" vectorEffect="non-scaling-stroke" />
           <path d={totalLine} fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="2" vectorEffect="non-scaling-stroke" />
@@ -136,6 +156,9 @@ function App() {
         </div>
         <div className="subtitle">
           Foreign military bases worldwide, {year}
+        </div>
+        <div className="oil-price">
+          Oil: ${Math.round(oilPrices[year] || 0)}/bbl
         </div>
       </div>
 
